@@ -1,11 +1,10 @@
-import { Column, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Generated, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { UserRole } from "./users.enum";
+import { BaseEntity } from "app.baseEntity";
+import { Barber } from "barber/barber.entity";
 
 @Entity('users')
-export class User{
-
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+export class User extends BaseEntity{
 
     @Column({
         nullable:false
@@ -29,6 +28,13 @@ export class User{
     })
     password: string;
 
-    @Column({default: UserRole.CUSTOMER})
+    @Column({
+        type: "enum",
+        enum: UserRole,
+        default: UserRole.CUSTOMER
+    })
     role: UserRole;
+
+    @OneToOne(()=> Barber, )
+    barber?: Barber;
 }
