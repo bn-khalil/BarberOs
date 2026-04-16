@@ -1,16 +1,20 @@
 import { Column, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { UserRole } from "./users.enum";
-import { min } from "rxjs";
 
-@Entity()
+@Entity('users')
 export class User{
+
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column()
+    @Column({
+        nullable:false
+    })
     first_name: string;
 
-    @Column()
+    @Column({
+        nullable:false
+    })
     last_name: string;
 
     @Column({
@@ -18,9 +22,11 @@ export class User{
         unique:true,
         nullable:false
     })
-    phone_number: number;
+    phone_number: string;
 
-    @Column()
+    @Column({
+        nullable:false
+    })
     password: string;
 
     @Column({default: UserRole.CUSTOMER})
