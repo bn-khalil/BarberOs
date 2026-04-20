@@ -17,9 +17,15 @@ export class userRepository {
         return this.userRepository.find();
     }
 
-    async findUser(id: string): Promise <User | null> {
+    async findUserById(id: string): Promise <User | null> {
         return this.userRepository.findOne(
             {where: { id: id }}
+        );
+    }
+    
+    async findUserByPhone(phone: string): Promise <User | null> {
+        return this.userRepository.findOne(
+            {where: { phone_number: phone }}
         );
     }
 } 

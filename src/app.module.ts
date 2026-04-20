@@ -7,9 +7,10 @@ import { BarberModule } from './barber/barber.module';
 import { ServiceModule } from './service/service.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { userRepository } from 'users/users.repository';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, TypeOrmModule, BarberModule, ServiceModule, AppointmentModule, userRepository],
+  imports: [UsersModule, TypeOrmModule, BarberModule, ServiceModule, AppointmentModule, userRepository, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

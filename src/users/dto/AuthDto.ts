@@ -34,6 +34,15 @@ export class UserDto{
         dto.role = user.role;
         return dto;
     }
+
+    static fromDto(dto: UserDto): UserDto {
+        const user = new User();
+        user.first_name = dto.first_name;
+        user.last_name = dto.last_name;
+        user.phone_number = dto.phone_number;
+        user.role = dto.role;
+        return user;
+    }
 }
 
 export class UserRegisterBarberDto {

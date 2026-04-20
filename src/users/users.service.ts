@@ -10,7 +10,7 @@ export class UsersService {
 
     async getUser(id : string): Promise<UserDto> {
         try {
-            const user = await this.userRepository.findUser(id);
+            const user = await this.userRepository.findUserById(id);
             if (!user)
                 throw new NotFoundException(`User with this id = ${id} not found!`);
             return UserDto.fromEntity(user);
