@@ -1,7 +1,8 @@
-import { Column, Entity, Generated, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Generated, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { UserRole } from "./users.enum";
 import { BaseEntity } from "app.baseEntity";
 import { Barber } from "barber/barber.entity";
+import { Appointment } from "appointment/appointment.entity";
 
 @Entity('users')
 export class User extends BaseEntity{
@@ -35,6 +36,9 @@ export class User extends BaseEntity{
     })
     role: UserRole;
 
-    @OneToOne(()=> Barber, )
+    @OneToOne(() => Barber, (Barber)=>Barber.owner)
     barber?: Barber;
+
+    @OneToMany(() => Appointment, (appointment)=> appointment.customer, {cascade: true})
+    appointments?: Appointment[];
 }

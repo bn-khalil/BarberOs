@@ -1,9 +1,12 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import { STATUS } from "./barber.enum";
 import { BaseEntity } from "app.baseEntity";
+import { User } from "users/users.entity";
+import { Appointment } from "appointment/appointment.entity";
 
 @Entity('barbers')
 export class Barber extends BaseEntity {
+
     @Column({
         nullable:false,
         default: 0
@@ -22,5 +25,12 @@ export class Barber extends BaseEntity {
         nullable: false,
         default: 0
     })
-    working_hours: Number;
+    working_hours: number;
+
+    @OneToOne(()=> User, (user)=>user.barber, {cascade: true})
+    @JoinColumn({name: 'user_id'})
+    owner: User;
+
+    @OneToMany(() => Appointment, (appointment)=> appointment.barber, {cascade: true})
+    appointments?: Appointment[];
 }
