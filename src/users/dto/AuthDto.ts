@@ -15,6 +15,16 @@ export class UserRegisterDto {
     phone_number: string;
     password: string;
     role: UserRole;
+
+    static fromDto(dto: UserRegisterDto): User {
+        const user = new User();
+        user.first_name = dto.first_name;
+        user.last_name = dto.last_name;
+        user.phone_number = dto.phone_number;
+        user.role = dto.role;
+        user.password = dto.password;
+        return user;
+    }
 }
 
 export class UserDto{
@@ -24,6 +34,8 @@ export class UserDto{
     last_name: string;
     phone_number: string;
     role: UserRole;
+    createdAt: Date;
+    UpdatedAt: Date;
 
     static fromEntity(user: User): UserDto {
         const dto = new UserDto();
@@ -32,16 +44,9 @@ export class UserDto{
         dto.last_name = user.last_name;
         dto.phone_number = user.phone_number;
         dto.role = user.role;
+        dto.UpdatedAt = user.updatedAt;
+        dto.createdAt = user.createAt;
         return dto;
-    }
-
-    static fromDto(dto: UserDto): UserDto {
-        const user = new User();
-        user.first_name = dto.first_name;
-        user.last_name = dto.last_name;
-        user.phone_number = dto.phone_number;
-        user.role = dto.role;
-        return user;
     }
 }
 
