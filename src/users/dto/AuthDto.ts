@@ -5,8 +5,8 @@ import { User } from "users/users.entity";
 import { UserRole } from "users/users.enum";
 
 export class UserLoginDto {
-    phoneNumber: string;
-    passowrd: string;
+    phone_number: string;
+    password: string;
 }
 
 export class UserRegisterDto {
