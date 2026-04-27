@@ -20,5 +20,14 @@ export class UsersService {
             throw new InternalServerErrorException("Something went wrong while fetching the user")
         }
     }
-    
+
+    async getAllUsers(): Promise<UserDto[]> {
+        try {
+            const users = await this.userRepository.findAll();
+            let userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
+            return userDtos;
+        } catch (error){
+            throw error;
+        }
+    }
 }
