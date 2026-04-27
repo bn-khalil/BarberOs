@@ -11,7 +11,6 @@ export class userRepository {
     ){}
 
     async createUser(user: Partial<User>): Promise <User> {
-        console.log(user)
         return this.userRepository.save(user);
     }
 

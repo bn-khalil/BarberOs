@@ -7,10 +7,19 @@ import { BarberModule } from './barber/barber.module';
 import { ServiceModule } from './service/service.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule, TypeOrmModule, BarberModule, ServiceModule, AppointmentModule, AuthModule],
-  controllers: [AppController],
-  providers: [AppService],
+imports: [
+		UsersModule,
+		TypeOrmModule,
+		BarberModule, 
+		ServiceModule, 
+		AppointmentModule, 
+		AuthModule,
+		ConfigModule.forRoot({isGlobal: true}),
+	],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}

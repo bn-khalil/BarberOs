@@ -1,13 +1,18 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { barberDto } from 'barber/dto/barberDto';
 import { UserDto, UserLoginDto, UserRegisterBarberDto, UserRegisterDto } from 'users/dto/AuthDto';
 import { userRepository } from 'users/users.repository';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private readonly userRepository: userRepository){}
+    constructor(
+        private readonly userRepository: userRepository,
+        private readonly jwtService: JwtService
+    ){}
 
-    async register(userdto: UserRegisterDto): Promise<UserDto> {
+    async singUp(userdto: UserRegisterDto): Promise<UserDto> {
         try{
             const user = await this.userRepository.findUserByPhone(userdto.phone_number);
             if (user)
@@ -20,19 +25,23 @@ export class AuthService {
         }
     }
 
-    async loing(userdto: UserLoginDto): Promise<{message: string}> {
+    async singIn(userdto: UserLoginDto): Promise<{token: string}> {
         try{
             const user = await this.userRepository.findUserByPhone(userdto.phone_number);
             if (!user)
                 throw new ConflictException(`User with this phone not exist!`);
-            console.log(user.password)
-            console.log(userdto.password)
 
             if (user.password != userdto.password)
-                throw new ConflictException(`Password not matching`);
-            console.log(user)
+                throw new ConflictException(`Invalid Password`);
 
-            return {message: "login secsessfuly completed!"};
+            const payload = { 
+                sub: user.id,
+                username: user.first_name
+            };
+
+            const token : string = await this.jwtService.signAsync(payload);
+
+            return {token: token};
         } catch(error) {
             throw error;
         }
