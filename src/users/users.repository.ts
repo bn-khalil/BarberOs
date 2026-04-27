@@ -29,4 +29,8 @@ export class userRepository {
             {where: { phone_number: phone }}
         );
     }
+
+    get manager() {
+        return this.userRepository;
+    }
 } 

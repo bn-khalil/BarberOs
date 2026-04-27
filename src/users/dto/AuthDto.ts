@@ -49,21 +49,3 @@ export class UserDto{
         return dto;
     }
 }
-
-export class UserRegisterBarberDto {
-    id: string;
-    experience_years: number;
-    status: STATUS;
-    working_hours: number;
-    user_id: string;
-
-    static fromEntity(user: Barber): UserRegisterBarberDto {
-        const dto = new UserRegisterBarberDto();
-        dto.experience_years = user.experience_years;
-        dto.id = user.id;
-        dto.status = user.status;
-        dto.user_id = user.owner.id;
-        dto.working_hours = user.working_hours;
-        return dto;
-    }
-}

@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { barberDto } from 'barber/dto/barberDto';
-import { UserDto, UserLoginDto, UserRegisterBarberDto, UserRegisterDto } from 'users/dto/AuthDto';
+import { UserDto, UserLoginDto, UserRegisterDto } from 'users/dto/AuthDto';
 import { userRepository } from 'users/users.repository';
 import * as bcrypt from 'bcrypt';
 
@@ -44,7 +44,7 @@ export class AuthService {
             throw new UnauthorizedException(`Invalid Password`);
 
         const payload = { 
-            sub: user.id,
+            id: user.id,
             username: user.first_name + " " + user.last_name,
             role: user.role
         };

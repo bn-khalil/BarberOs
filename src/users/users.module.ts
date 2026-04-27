@@ -4,6 +4,7 @@ import { UsersController } from './users.controller';
 import { userRepository } from './users.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
+import { BarberModule } from 'barber/barber.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],

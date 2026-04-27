@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { User } from './users.entity';
 import { userRepository } from './users.repository';
 import { UserDto } from './dto/AuthDto';
@@ -6,7 +6,9 @@ import { UserDto } from './dto/AuthDto';
 @Injectable()
 export class UsersService {
 
-    constructor(private readonly userRepository: userRepository){}
+    constructor(
+        private readonly userRepository: userRepository,
+    ){}
 
     async getUser(id : string): Promise<UserDto> {
         try {

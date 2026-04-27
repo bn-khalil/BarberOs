@@ -17,7 +17,6 @@ export class Barber extends BaseEntity {
         type:"enum",
         enum:STATUS,
         default:STATUS.UNAVAILABLE,
-        nullable:false,
     })
     status: STATUS;
 
