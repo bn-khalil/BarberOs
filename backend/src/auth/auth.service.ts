@@ -1,6 +1,5 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { barberDto } from 'barber/dto/barberDto';
 import { UserDto, UserLoginDto, UserRegisterDto } from 'users/dto/AuthDto';
 import { userRepository } from 'users/users.repository';
 import * as bcrypt from 'bcrypt';
