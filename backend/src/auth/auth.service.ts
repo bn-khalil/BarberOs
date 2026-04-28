@@ -36,7 +36,7 @@ export class AuthService {
     async singIn(userdto: UserLoginDto): Promise<{token: string}> {
         const user = await this.userRepository.findUserByPhone(userdto.phone_number);
         if (!user)
-            throw new ConflictException(`User with this phone not exist!`);
+            throw new NotFoundException(`User with this phone not exist!`);
 
         const isPasswordValid = await bcrypt.compare(userdto.password, user.password);
         if (!isPasswordValid)
