@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { PATHS } from "./paths";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import { AuthProvider } from "../context/AuthContext";
 
 export default function AppRouter() {
     return (
