@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../routes/paths"
+import { useAuth } from "../context/AuthContext";
 
 interface NavItem {
     itemName: string,
@@ -22,7 +23,6 @@ const navItems: NavItem[] = [
 ]
 
 export function Navbar() {
-
     const navigate = useNavigate();
 
     return (
