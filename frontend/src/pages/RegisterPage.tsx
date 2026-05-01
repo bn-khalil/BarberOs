@@ -1,19 +1,48 @@
 import { useState } from "react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../services/AuthService";
 
 export default function RegisterPage() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
+  const [phone_number, setPhone_number] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Deep Dive: نجمع البيانات لإرسالها للـ NestJS لاحقاً
-    console.log("Registering with:", { fullName, email, password });
+	
+	setLoading(true);
+
+	const user = {
+		first_name: first_name,
+		last_name: last_name,
+		phone_number: phone_number,
+		password: password,
+		role: "CUSTOMER",
+	}
+
+    try {
+      const response = await registerUser(user);
+      if (response) {
+          localStorage.setItem("token", response.data.token);
+          navigate("/login");
+          setMessage("");
+      }
+    } catch (error: any) {
+        if (error.response && error.response.data) {
+            const serverMessage = error.response.data.message;
+            setMessage(serverMessage || "Login failed");
+        } else 
+            setMessage("Error connection to Server")
+
+    } finally {
+        setLoading(false);
+    }
   };
 
   return (
@@ -23,35 +52,46 @@ export default function RegisterPage() {
         <p className="mb-8 text-slate-600 font-normal text-lg">
           Join our Barber Shop today
         </p>
-
+        <p className="mb-5 text-red-400 font-normal text-md">
+          {message}
+        </p>
         <form onSubmit={handleSubmit} className="text-left space-y-5">
-          {/* Full Name Field */}
           <div>
-            <label className="block mb-2 text-sm font-medium text-slate-900">Full Name</label>
+            <label className="block mb-2 text-sm font-medium text-slate-900">First Name</label>
             <input
               type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="John Doe"
+              value={first_name}
+              onChange={(e) => setFirst_name(e.target.value)}
+              placeholder="first name"
               className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               required
             />
           </div>
 
-          {/* Email Field */}
+		 <div>
+            <label className="block mb-2 text-sm font-medium text-slate-900">Last Name</label>
+            <input
+              type="text"
+              value={last_name}
+              onChange={(e) => setLast_name(e.target.value)}
+              placeholder="first name"
+              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+              required
+            />
+          </div>
+
           <div>
             <label className="block mb-2 text-sm font-medium text-slate-900">Your Email</label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="name@mail.com"
+              type="tel"
+              value={phone_number}
+              onChange={(e) => setPhone_number(e.target.value)}
+              placeholder="06 0000-0000"
               className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               required
             />
           </div>
 
-          {/* Password Field */}
           <div className="relative">
             <label className="block mb-2 text-sm font-medium text-slate-900">Password</label>
             <input
@@ -71,8 +111,8 @@ export default function RegisterPage() {
             </button>
           </div>
 
-          <button className="w-full bg-slate-900 text-white font-bold py-3 rounded-lg hover:bg-slate-800 transition-all cursor-pointer shadow-lg shadow-slate-200">
-            Sign Up
+          <button onSubmit={handleSubmit} className="w-full bg-slate-900 text-white font-bold py-3 rounded-lg hover:bg-slate-800 transition-all cursor-pointer shadow-lg shadow-slate-200">
+			{loading ? "Waiting..." : "Sign Up"}
           </button>
 
           <p className="text-center text-sm text-slate-600 mt-6">

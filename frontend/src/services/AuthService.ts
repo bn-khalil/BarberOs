@@ -9,3 +9,12 @@ export const loginUser = (userData: any) => {
         throw error.response?.data || "Server Error";
     }
 }   
+
+export const registerUser = (userData: any) => {
+    try {
+        const response = apiClient.post("/auth/register", userData);
+        return response;
+    } catch (error: any) {
+        throw error.response?.data || "Server Error";
+    }
+}

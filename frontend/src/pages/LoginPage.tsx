@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { loginUser } from "../services/AuthService";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
+    const {login} = useAuth();
     const [passwordShown, setPasswordShown] = useState(false)
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
@@ -12,6 +14,7 @@ export default function LoginPage() {
         password: ""
     });
     const navigate = useNavigate();
+    const location = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,9 +24,8 @@ export default function LoginPage() {
     try {
         const response = await loginUser(user);
         if (response) {
-            localStorage.setItem("token", response.data.token);
-            navigate("/");
-            setMessage("");
+            login(response?.data?.token);
+            navigate(location.state?.from.pathname || "/");
         }
     } catch (error: any) {
         if (error.response && error.response.data) {
