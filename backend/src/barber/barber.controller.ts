@@ -18,7 +18,6 @@ export class BarberController {
         @Param('id') id: string,
         @Body() userRegisterBarberDto: UserRegisterBarberDto,
     ){
-        console.log('Target User ID:', id);
         const barber = await this.barberService.createBarber(userRegisterBarberDto, id);
         return UserRegisterBarberDto.fromEntity(barber);
     }
