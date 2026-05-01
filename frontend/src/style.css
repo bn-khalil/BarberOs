@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #3b82f6;
+
+  --color-main: #121212;
+  --color-surface: #1F1F1F;
+  --color-gold: #CF9E51;
+  --color-main-second: #1f1f1f;
+  --background-image-hero-pattern: url('./assets/bg-1.jpg');
+
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Open Sans", sans-serif;
 }
+
+/* body{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+} */
