@@ -1,12 +1,11 @@
 import { Quote } from "lucide-react";
-import clientImg from "../assets/hair-cut-3.jpg"; // Replace with your image path
+import clientImg from "../assets/hair-cut-3.jpg";
 
 export function Testimonial() {
   return (
-    <section className="bg-main py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="bg-main-second py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        
-        {/* Left Side: Image with Decorative Frame */}
+
         <div className="order-2 flex justify-end">
             <div className="relative w-[60%] p-6 border border-gold">
                 <div className="absolute -top-6 -left-6 z-20">
@@ -26,7 +25,7 @@ export function Testimonial() {
           </h2>
           
           <div className="relative">
-            <p className="font-sans text-gray-300 text-lg md:text-xl leading-relaxed italic pr-10">
+            <p className="font-sans text-gray-300 text-lg md:text-xl leading-relaxed pr-10">
               Barbers cuts hair with care and attention to detail. Their
               expertise and professionalism are evident in their careful
               approach to cutting hair. With their knowledge and

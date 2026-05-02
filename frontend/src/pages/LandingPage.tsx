@@ -5,6 +5,9 @@ import { AboutSection } from "../sections/AboutSection";
 import { ServicesSection } from "../sections/ServiceSection";
 import { WorkingHours } from "../sections/WorkingHours";
 import { Testimonial } from "../sections/Testimonial";
+import { Gallery } from "../sections/GalerySection";
+import { BookSection } from "../sections/BookSection";
+import { Footer } from "../sections/Footer";
 
 export function LandingPage() {
     return (
@@ -23,7 +26,10 @@ export function LandingPage() {
             <AboutSection/>
             <ServicesSection/>
             <WorkingHours/>
+            <Gallery/>
             <Testimonial/>
+            <BookSection/>
+            <Footer/>
         </div>
     );
 }
