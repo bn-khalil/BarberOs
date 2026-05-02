@@ -43,8 +43,6 @@ export default function RegisterPage() {
     } finally {
         setLoading(false);
     }
-
-    console.log("Registering with:", user);
   };
 
   return (
