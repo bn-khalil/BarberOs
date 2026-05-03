@@ -6,14 +6,14 @@ import haircut from "../assets/pos-1.jpg"
 import trimming from "../assets/bg-1.jpg"
 import style from "../assets/Style.jpg"
 
-export function ServicesSection() {
-const services = [
+export const services = [
     { title: "Shaving", price: "55", image: shaving, Icon: GiRazor },
     { title: "Haircutting", price: "75", image: haircut, Icon: FaCut },
     { title: "Trimming", price: "35", image: trimming, Icon: FaSprayCan },
     { title: "Style", price: "45", image: style, Icon: GiComb },
   ];
 
+export function ServicesSection() {
   return (
     <section id="services" className="bg-main py-24 px-6">
       <div className="max-w-7xl mx-auto">

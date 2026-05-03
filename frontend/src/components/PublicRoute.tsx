@@ -4,10 +4,10 @@ import { LoadingCir } from "./Loading";
 import { PATHS } from "../routes/paths";
 
 const PublicRoute = () => {
-    const { user, loading } = useAuth();
+    const { isAuthenticated, loading } = useAuth();
     if (loading)
         return LoadingCir();
-    if (user?.id)
+    if (isAuthenticated)
         return <Navigate to={PATHS.HOME} replace/>;
     return <Outlet/>
 }

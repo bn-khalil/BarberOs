@@ -3,13 +3,14 @@ import { jwtDecode } from "jwt-decode";
 
 type User = {
     id: string,
-    phone: string,
+    username: string,
     role: "admin" | "customer" | "barber"
 }
 
 type AuthContextType = {
     user: User | null;
     loading: boolean;
+    isAuthenticated: boolean;
     login: (token: string) => void;
     logout: () => void;
 }
@@ -19,6 +20,7 @@ const AuthContext = createContext< AuthContextType | undefined > (undefined);
 export const AuthProvider = ({children} : {children: ReactNode}) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [isAuthenticated, setisAuthenticated] = useState<boolean>(false);
 
     const login = (token : string) =>{
         verifyToken(token);
@@ -34,6 +36,7 @@ export const AuthProvider = ({children} : {children: ReactNode}) => {
             const decoded: User = jwtDecode(token);
             setUser(decoded)
             localStorage.setItem("token", token);
+            setisAuthenticated(true);
         } catch (error) {
             logout();
         }
@@ -49,6 +52,7 @@ export const AuthProvider = ({children} : {children: ReactNode}) => {
     const contextValue: AuthContextType = useMemo(()=>({
         user,
         loading,
+        isAuthenticated,
         login,
         logout
     }), [user, loading])
