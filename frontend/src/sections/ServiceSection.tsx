@@ -15,7 +15,7 @@ const services = [
   ];
 
   return (
-    <section className="bg-main py-24 px-6">
+    <section id="services" className="bg-main py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="font-display text-gold text-5xl md:text-6xl font-bold mb-6">

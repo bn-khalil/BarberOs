@@ -1,35 +1,40 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { ArrowUpRight } from "lucide-react";
+import { PATHS } from "../routes/paths";
 
 export function Hero() {
+    const navigate = useNavigate();
     return (
         <section className="w-full h-[90%] flex">
-            <div className="w-1/2 h-full flex flex-col justify-center gap-7 ">
-                <h1 className="font-display text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+            <div className="w-1/2 max-lg:w-full h-full flex flex-col justify-center gap-7 ">
+                <h1 className="font-display max-lg:text-center text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight">
                     Getting you <br />
                     <span className="text-gold">handsome</span> is <br />
                     our goal
                 </h1>
-                <p className=" font-sans text-white opacity-80 text-lg md:text-xl max-w-xl leading-relaxed">
+                <p className=" font-sans max-lg:text-center text-white opacity-80 text-lg md:text-xl leading-relaxed">
                     Get the perfect cut every time of your dreams at 
                     the barber shop that cares about your style!
                 </p>
-                <div className="flex flex-wrap gap-4 mt-4">
+                <div className="flex flex-wrap gap-4 mt-4 items-center max-lg:justify-center">
                     <Button
+                    type="button"
                     label="Appointment" 
                     variant="primary" 
-                    className="px-10 py-4 text-sm uppercase tracking-widest"
-                    onClick={() => console.log("Booking...")}
+                    className="max-sm:px-5 max-sm:text-[10px] px-10 py-4 text-sm uppercase tracking-widest"
+                    onClick={() => navigate(PATHS.LOGIN)}
                     />
                     <Button 
+                    type="button"
                     label="Contact us" 
                     variant="outline" 
-                    className="px-10 py-4 text-sm uppercase tracking-widest"
+                    className="max-sm:px-5 max-sm:text-[10px] px-10 py-4 text-sm uppercase tracking-widest"
                     onClick={() => console.log("Contacting...")}
                     />
                 </div>
             </div>
-            <div className="w-1/2 h-full relative">
+            <div className="w-1/2 h-full relative max-lg:hidden">
 
                 <div className=" absolute -left-8 bottom-1/5 opacity-70 w-[40%] h-fit bg-gold p-4 flex flex-col">
                     <div className="flex justify-between items-start mb-4">

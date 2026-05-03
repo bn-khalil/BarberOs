@@ -6,29 +6,25 @@ interface NavItem {
 const navItems: NavItem[] = [
     {
         itemName: "Home",
-        itemPath: "/"
+        itemPath: "#"
     },
     {
         itemName: "About",
-        itemPath: "/about"
+        itemPath: "#about"
     },
     {
         itemName: "Services",
-        itemPath: "/services"
-    },
-    {
-        itemName: "Contact Us",
-        itemPath: "/contact-us"
+        itemPath: "#services"
     },
 ]
 
 export function Navbar() {
     return (
-    <nav className="flex justify-between items-center p-6 text-white">
+    <nav className="flex justify-between items-center p-6 text-white max-md:hidden">
       <ul className="flex space-x-8">
         {navItems.map((item) => (
           <li key={item.itemName}>
-            <a href={item.itemPath} className="transition-colors hover:text-brand">
+            <a href={item.itemPath} className="transition-colors hover:text-gold">
               {item.itemName}
             </a>
           </li>

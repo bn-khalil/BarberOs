@@ -1,9 +1,8 @@
-import React from 'react';
 import { FaPhone, FaEnvelope, FaLocationDot, FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa6';
 import logo from "../assets/main-logo.png"
 export function Footer (){
   return (
-    <footer className="bg-main text-gray-300 pb-12 pt-20 px-6 md:px-16 font-sans border-t border-[#C59D5F]/20">
+    <footer className="bg-main text-gray-300 pb-12 pt-20 px-6 md:px-16 font-sans border-t border-[#C59D5F]/20 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         
         <div className="space-y-6">
@@ -51,11 +50,11 @@ export function Footer (){
           <p className="text-sm text-gray-400">
             Stay in the loop with our latest blogs and offers. Subscribe to our newsletter now.
           </p>
-          <div className="flex flex-col sm:flex-row w-full overflow-hidden rounded-sm">
+          <div className="flex flex-col sm:flex-row w-full overflow-hidden">
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="bg-white text-black px-4 py-3 outline-none flex-grow text-sm"
+              className=" border border-gold/30 text-txt-col px-4 py-3 outline-none grow text-sm"
             />
             <button className="bg-[#D4A35B] hover:bg-[#B88A4A] text-[#111111] font-bold px-6 py-3 transition-colors text-sm uppercase tracking-wider">
               Subscribe

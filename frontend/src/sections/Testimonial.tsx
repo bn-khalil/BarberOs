@@ -3,7 +3,7 @@ import clientImg from "../assets/hair-cut-3.jpg";
 
 export function Testimonial() {
   return (
-    <section className="bg-main-second py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="bg-main-second py-24 max-md:pt-0 max-md:pb-5  px-6 md:px-12 lg:px-24 overflow-hidden">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
         <div className="order-2 flex justify-end">
