@@ -3,9 +3,10 @@ interface ButtonProps {
   variant?: 'primary' | 'outline';
   onClick?: () => void;
   className?: string;
+  type: "button" | "submit" | "reset" | undefined
 }
 
-export default function Button({ label, variant = 'primary', onClick, className = "" }: ButtonProps) {
+export default function Button({ label, variant = 'primary', onClick, className = "" , type}: ButtonProps) {
   const baseStyles = "px-10 py-4 text-sm font-bold uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer";
   
   const variants = {
@@ -14,7 +15,8 @@ export default function Button({ label, variant = 'primary', onClick, className 
   };
 
   return (
-    <button 
+    <button
+      type={type}
       onClick={onClick}
       className={`${baseStyles} ${variants[variant]} ${className}`}
     >

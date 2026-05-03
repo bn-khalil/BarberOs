@@ -37,7 +37,7 @@ const columns = [
 
 export function Gallery() {
   return (
-    <section className="bg-main py-20 px-6 md:px-12 lg:px-24 h-screen">
+    <section className="bg-main py-20  px-6 md:px-12 lg:px-24 h-screen max-md:hidden">
       <div className="max-w-7xl mx-auto">
         <h2 className="font-display text-gold text-center text-4xl md:text-5xl font-bold mb-16">
           Featured gallery
@@ -45,7 +45,7 @@ export function Gallery() {
         <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[30%]">
             
             {
-                columns.map((column, index)=> (
+                columns.map((column)=> (
                     <>
                         <div className={` overflow-hidden`}>
                             <img src={column.imagePath1} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="Barber work" />

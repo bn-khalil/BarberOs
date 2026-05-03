@@ -2,10 +2,10 @@ import Button from "../components/Button";
 
 export function AboutSection() {
   return (
-    <section className="bg-main-second py-20 px-6 md:px-12 lg:px-24">
-      <div className=" container mx-auto max-w-7xl gap-12 flex justify-between">
+    <section id="about" className="bg-main-second py-20 px-6 md:px-12 lg:px-24 max-lg:text-center">
+      <div className="container mx-auto max-w-7xl gap-12 grid grid-cols-1 md:grid-cols-3">
         
-        <div className="flex flex-col items-start md:items-center text-left md:text-center border-r-0 md:border-r border-white/10 pr-0 md:pr-12">
+        <div className="text-center border-r-0 md:border-r border-white/10 pr-0 md:pr-12">
           <span className="font-display text-gold text-8xl md:text-9xl font-bold leading-none">
             15
           </span>
@@ -14,7 +14,7 @@ export function AboutSection() {
           </div>
         </div>
 
-        <div className="md:col-span-8 flex flex-col gap-8">
+        <div className="flex flex-col gap-8 md:col-span-2">
           <h2 className="font-display text-gold text-4xl md:text-5xl font-bold">
             Who we are
           </h2>
@@ -28,10 +28,11 @@ export function AboutSection() {
           </p>
 
           <div className="mt-4">
-            <Button 
+            <Button
+              type="button"
               label="More about us" 
               variant="primary" 
-              className="px-12 py-5 text-sm"
+              className="max-sm:px-5 max-sm:text-[10px] px-12 py-5 text-sm"
               onClick={() => console.log("Navigating to About page")}
             />
           </div>

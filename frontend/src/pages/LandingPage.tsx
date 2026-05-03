@@ -14,7 +14,7 @@ export function LandingPage() {
         <div className="w-full bg-main overflow-hidden">
             <div className="w-full relative h-screen container mx-auto">
                 <img 
-                    className="absolute top-0 right-0 w-1/2 h-full" 
+                    className="absolute top-0 right-0 w-1/2 h-full max-lg:hidden" 
                     src={bg} 
                     alt="Background" 
                 />

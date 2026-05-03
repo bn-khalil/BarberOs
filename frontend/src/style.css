@@ -7,14 +7,18 @@
   --color-surface: #1F1F1F;
   --color-gold: #CF9E51;
   --color-main-second: #1f1f1f;
+  --color-txt-col: #FFFFFFCC;
   --background-image-hero-pattern: url('./assets/bg-1.jpg');
 
   --font-display: "Playfair Display", serif;
   --font-sans: "Open Sans", sans-serif;
 }
 
-/* body{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-} */
+body {
+  @apply bg-main;
+  overscroll-behavior: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
