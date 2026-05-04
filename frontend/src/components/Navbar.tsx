@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { PATHS } from "../routes/paths"
+import { useAuth } from "../context/AuthContext"
 
 interface NavItem {
     itemName: string,
@@ -9,41 +8,44 @@ interface NavItem {
 const navItems: NavItem[] = [
     {
         itemName: "Home",
-        itemPath: "/"
+        itemPath: "#"
     },
     {
         itemName: "About",
-        itemPath: "/about"
+        itemPath: "#about"
     },
     {
-        itemName: "Contact Us",
-        itemPath: "/contact-us"
+        itemName: "Services",
+        itemPath: "#services"
     },
 ]
 
 export function Navbar() {
-    const navigate = useNavigate();
+  
+  	const {isAuthenticated} = useAuth();
+
+  	if (isAuthenticated) {
+		navItems[1].itemName="Appointements";
+		navItems[1].itemPath="appointements";
+		if (navItems.length < 4) {
+			navItems.push({
+				itemName: "Barbers",
+				itemPath: "barbers"
+			})
+		}
+	}
 
     return (
-    <nav className="flex justify-between items-center p-6 bg-slate-900 text-white shadow-lg">
-      <h2 className="text-2xl font-bold text-brand">BarberShop</h2> 
-      <ul className="flex space-x-8">
-        {navItems.map((item) => (
-          <li key={item.itemName}>
-            <a href={item.itemPath} className="transition-colors hover:text-brand">
-              {item.itemName}
-            </a>
-          </li>
-        ))}
-      </ul>
-        <div className="flex items-center gap-4">
-        <button className="px-4 py-2 text-sm font-medium text-white border border-white/20 rounded-lg hover:bg-white/10 transition-all cursor-pointer" onClick={() => navigate(PATHS.LOGIN)}>
-            Sign In
-        </button>
-        <button className="px-4 py-2 text-sm font-medium bg-brand text-white rounded-lg hover:bg-blue-700 transition-all shadow-md cursor-pointer" onClick={() => navigate(PATHS.REGISTER)}>
-            Register
-        </button>
-        </div>
-    </nav>
+		<nav className="flex justify-between items-center p-6 text-white max-md:hidden">
+		<ul className="flex space-x-8">
+			{navItems.map((item) => (
+			<li key={item.itemName}>
+				<a href={item.itemPath} className="transition-colors hover:text-gold">
+				{item.itemName}
+				</a>
+			</li>
+			))}
+		</ul>
+		</nav>
     )
 }
