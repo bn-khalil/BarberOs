@@ -4,7 +4,7 @@ import { JwtAuthGuard } from 'auth/auth.guard';
 import { UserRegisterBarberDto } from './dto/barberDto';
 import { Roles } from 'users/user.role';
 import { UserRole } from 'users/users.enum';
-import { RolesGuard } from 'users/users.guard';
+import { RolesGuard } from 'users/users.Roleguard';
 
 @Controller('barber/')
 @UseGuards(JwtAuthGuard, RolesGuard)
