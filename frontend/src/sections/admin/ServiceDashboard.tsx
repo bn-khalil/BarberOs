@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { FaCirclePlus } from "react-icons/fa6";
-// import {services} from '../ServiceSection'
 import { FaEdit } from "react-icons/fa";
 import { getAllServices } from '../../services/ServiceService';
 
@@ -27,7 +26,7 @@ const renderLoadingItems = (number: number) => {
     ));
 };
 
-function ServiceDashboard() {
+function ServiceDashboard({setCurrentSession}:any) {
 
     const [services, setServices] = useState<ServiceData[]>([]);
     const [loading, setLoading] = useState(18);
@@ -45,8 +44,8 @@ function ServiceDashboard() {
   return (
     <div className=''>
         <div className="flex items-center justify-between">
-            <h1 className='font-sans text-gold text-xl'>Services</h1>
-            <div className="flex items-center font-bold bg-gold text-main-second p-2 px-4 cursor-pointer">
+            <h1 className='font-sans text-gold text-xl'>All Services</h1>
+            <div className="flex items-center font-bold bg-gold text-main-second p-2 px-4 cursor-pointer" onClick={()=>setCurrentSession('create service')}>
                 <p>
                     Add
                 </p>

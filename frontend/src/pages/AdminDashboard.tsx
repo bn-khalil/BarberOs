@@ -2,10 +2,12 @@ import { useAuth } from '../context/AuthContext'
 import SideBar from '../components/SideBar';
 import { useState } from 'react';
 import ServiceDashboard from '../sections/admin/ServiceDashboard';
+import ServiceCreate from '../sections/admin/ServiceCreate';
 
 function AdminDashboard() {
     const {user} = useAuth();
     const [currectSession, setCurrentSession] = useState('dashboard')
+    console.log(currectSession)
   return (
     <div className='w-full h-screen flex flex-col items-center justify-center overflow-hidden'>
         <div className="h-[90%] text-txt-col w-[90%] text-ma bg-main-second grid grid-cols-12 rounded-2xl">
@@ -28,7 +30,9 @@ function AdminDashboard() {
                 Super Admin.
               </p> */}
 
-              {currectSession == 'services' && <ServiceDashboard/>}
+              
+              {currectSession == 'services' && <ServiceDashboard setCurrentSession={setCurrentSession}/>}
+              {currectSession == 'create service' && <ServiceCreate setCurrentSession={setCurrentSession}/>}
             
             </div>
           </div>
