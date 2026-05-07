@@ -2,14 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import { PATHS } from "./paths";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
-import { AuthProvider, useAuth } from "../context/AuthContext";
+import { AuthProvider } from "../context/AuthContext";
 import ProtectedRoute from "../components/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute";
 import { PageNotFound } from "../pages/NotFound";
-import { LandingPage } from "../pages/LandingPage";
-import { Header } from "../sections/Header";
-import UserDashboard from "../pages/UserDashboard";
 import HomePage from "../pages/HomePage";
+import AdminRoute from "../components/AdminRoute";
+import AdminDashboard from "../pages/AdminDashboard";
 
 export default function AppRouter() {
     return (
@@ -24,6 +23,11 @@ export default function AppRouter() {
 
                 <Route element={<ProtectedRoute/>}>
                 </Route>
+
+                <Route element={<AdminRoute/>}>
+                    <Route path={PATHS.DASHBOARD} element={<AdminDashboard/>}/>
+                </Route>
+                
 
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>

@@ -1,6 +1,5 @@
 import { Header } from "../sections/Header";
 import Services from "../sections/Services";
-import { ServicesSection } from "../sections/ServiceSection";
 import { UserHero } from "../sections/UserHero";
 
 export default function UserDashboard() {

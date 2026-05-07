@@ -13,6 +13,7 @@ export const services = [
     { title: "Style", price: "45", image: style, Icon: GiComb },
   ];
 
+  
 export function ServicesSection() {
   return (
     <section id="services" className="bg-main py-24 px-6">
