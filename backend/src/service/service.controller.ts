@@ -13,7 +13,6 @@ export class ServiceController {
 	@Get()
 	@HttpCode(HttpStatus.OK)
 	listServices(){
-		console.log("enterd")
 		return this.serviceService.getAllServices();
 	}
 	
