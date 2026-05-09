@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Button from '../../components/Button'
-import type { ServiceData } from './ServiceDashboard';
 import { addNewService } from '../../services/ServiceService';
 import { HttpStatusCode } from 'axios';
 
@@ -10,7 +9,6 @@ function ServiceCreate({setCurrentSession}:any) {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [image, setImage] = useState("");
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [message, setMessage] = useState("");
