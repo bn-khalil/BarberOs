@@ -7,12 +7,11 @@ import ServiceCreate from '../sections/admin/ServiceCreate';
 function AdminDashboard() {
     const {user} = useAuth();
     const [currectSession, setCurrentSession] = useState('dashboard')
-    console.log(currectSession)
   return (
     <div className='w-full h-screen flex flex-col items-center justify-center overflow-hidden'>
         <div className="h-[90%] text-txt-col w-[90%] text-ma bg-main-second grid grid-cols-12 rounded-2xl">
           <SideBar setcurrectSession={setCurrentSession}/>
-          <div className="col-span-10">
+          <div className="col-span-10 h-full">
             <div className="w-full flex items-center justify-between border-b border-gold p-4">
               <h1 className='font-bold text-2xl font-sans'>Dashboard</h1>
                 <div className="text-txt-col  rounded-full border border-gold cursor-pointer">

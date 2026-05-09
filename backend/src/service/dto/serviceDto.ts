@@ -1,11 +1,15 @@
+import { Type } from "class-transformer";
 import { Service } from "service/service.entity";
 
 export class ServiceDto {
     id: string;
     title: string;
     description: string;
+    @Type(() => Number)
     price: number;
+    @Type(() => Number)
     duration: number;
+    base_url: string;
 
     static fromEntity(service: Service) : ServiceDto {
         let dto = new ServiceDto();
@@ -14,6 +18,7 @@ export class ServiceDto {
         dto.price = service.price;
         dto.title = service.title;
         dto.id = service.id;
+        dto.base_url = service.base_url;
         return dto;
     }
 
@@ -23,6 +28,7 @@ export class ServiceDto {
         entity.duration = dto.duration;
         entity.price = dto.price;
         entity.title = dto.title;
+        entity.base_url = dto.base_url;
         return entity;
     }
 }

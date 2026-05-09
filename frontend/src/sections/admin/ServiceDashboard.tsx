@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { getAllServices } from '../../services/ServiceService';
+import { BASE_URL } from '../../services/Api';
 
 export interface ServiceData{
     title: string,
     description: string,
     price: number,
     duration: number,
-    image: string
+    base_url: string
 }
 
 const renderLoadingItems = (number: number) => {
@@ -36,6 +37,7 @@ function ServiceDashboard({setCurrentSession}:any) {
             const response = await getAllServices();
             if (response) {
                 setLoading(0);
+                console.log(response.data)
                 setServices(response.data);
             }
         }
@@ -62,7 +64,7 @@ function ServiceDashboard({setCurrentSession}:any) {
                                 <div className="relative w-full h-40 overflow-hidden">
                                     <img 
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                                        src={service.image} 
+                                        src={BASE_URL+ '/uploads/' +service.base_url} 
                                         alt={service.title} 
                                     />
                                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>

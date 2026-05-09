@@ -17,4 +17,7 @@ export class Service extends BaseEntity {
         default: 0
     })
     duration: number;
+
+    @Column({ nullable: true })
+    base_url: string;
 }
