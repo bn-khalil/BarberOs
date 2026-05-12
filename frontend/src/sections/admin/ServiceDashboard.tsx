@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { FaCirclePlus } from "react-icons/fa6";
-// import {services} from '../ServiceSection'
 import { FaEdit } from "react-icons/fa";
 import { getAllServices } from '../../services/ServiceService';
+import { BASE_URL } from '../../services/Api';
 
 export interface ServiceData{
     title: string,
     description: string,
     price: number,
     duration: number,
-    image: string
+    base_url: string
 }
 
 const renderLoadingItems = (number: number) => {
@@ -27,7 +27,7 @@ const renderLoadingItems = (number: number) => {
     ));
 };
 
-function ServiceDashboard() {
+function ServiceDashboard({setCurrentSession}:any) {
 
     const [services, setServices] = useState<ServiceData[]>([]);
     const [loading, setLoading] = useState(18);
@@ -37,6 +37,7 @@ function ServiceDashboard() {
             const response = await getAllServices();
             if (response) {
                 setLoading(0);
+                console.log(response.data)
                 setServices(response.data);
             }
         }
@@ -45,8 +46,8 @@ function ServiceDashboard() {
   return (
     <div className=''>
         <div className="flex items-center justify-between">
-            <h1 className='font-sans text-gold text-xl'>Services</h1>
-            <div className="flex items-center font-bold bg-gold text-main-second p-2 px-4 cursor-pointer">
+            <h1 className='font-sans text-gold text-xl'>All Services</h1>
+            <div className="flex items-center font-bold bg-gold text-main-second p-2 px-4 cursor-pointer" onClick={()=>setCurrentSession('create service')}>
                 <p>
                     Add
                 </p>
@@ -63,7 +64,7 @@ function ServiceDashboard() {
                                 <div className="relative w-full h-40 overflow-hidden">
                                     <img 
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                                        src={service.image} 
+                                        src={BASE_URL+ '/uploads/' +service.base_url} 
                                         alt={service.title} 
                                     />
                                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>

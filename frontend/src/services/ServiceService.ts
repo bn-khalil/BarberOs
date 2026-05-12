@@ -11,9 +11,11 @@ export const getAllServices = async () => {
     }
 } 
 
-export const addNewService = async (serviceData: ServiceData) => {
+export const addNewService = async (serviceData: FormData) => {
     try {
-        const response = await apiClient.post("services", serviceData);
+        const response = await apiClient.post("services", serviceData, {headers: {
+            'Content-Type': 'multipart/form-data',
+        }});
         return response;
     } catch (error: any) {
         throw error.response?.data || "Server Error";
