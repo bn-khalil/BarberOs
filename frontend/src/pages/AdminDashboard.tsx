@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ServiceDashboard from '../sections/admin/ServiceDashboard';
 import ServiceCreate from '../sections/admin/ServiceCreate';
 import BarberDashboard from '../sections/admin/BarberDashboard';
+import BarberCreate from '../sections/admin/BarberCreate';
 
 function AdminDashboard() {
     const {user} = useAuth();
@@ -35,6 +36,8 @@ function AdminDashboard() {
               {currectSession == 'create service' && <ServiceCreate setCurrentSession={setCurrentSession}/>}
 
               {currectSession == 'barbers' && <BarberDashboard setCurrentSession={setCurrentSession}/>}
+              {currectSession == 'create barber' && <BarberCreate setCurrentSession={setCurrentSession}/>}
+              
 
             </div>
           </div>
