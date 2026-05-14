@@ -32,7 +32,6 @@ function AdminDashboard() {
                 Super Admin.
               </p> */}
 
-              
               {currectSession == 'services' && <ServiceDashboard setCurrentSession={setCurrentSession}/>}
               {currectSession == 'create service' && <ServiceCreate setCurrentSession={setCurrentSession}/>}
 

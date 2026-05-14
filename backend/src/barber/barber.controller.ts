@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Patch, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Put, UseGuards } from '@nestjs/common';
 import { BarberService } from './barber.service';
 import { JwtAuthGuard } from 'auth/auth.guard';
 import { UserRegisterBarberDto } from './dto/barberDto';
@@ -28,5 +28,14 @@ export class BarberController {
     ){
         const barber = await this.barberService.createBarber(userRegisterBarberDto, id);
         return UserRegisterBarberDto.fromEntity(barber);
+    }
+
+    @Delete(':id/delete-barber')
+    @Roles(UserRole.ADMIN)
+    @HttpCode(HttpStatus.OK)
+    async deleteBarber(
+        @Param('id') id: string
+    ){
+        await this.barberService.deleteBarber(id);
     }
 }

@@ -20,3 +20,12 @@ export const getAllBarbers = async () => {
         throw error.response?.data || "Server Error";
     }
 }
+
+export const deleteBarber = async (userId: string) => {
+    try {
+        const response = apiClient.delete(`barbers/${userId}/delete-barber`);
+        return response;
+    } catch (error: any) {
+        throw error.response?.data || "Server Error";
+    }
+}
