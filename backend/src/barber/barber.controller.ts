@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Param, Patch, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Put, UseGuards } from '@nestjs/common';
 import { BarberService } from './barber.service';
 import { JwtAuthGuard } from 'auth/auth.guard';
 import { UserRegisterBarberDto } from './dto/barberDto';
@@ -6,11 +6,19 @@ import { Roles } from 'users/user.role';
 import { UserRole } from 'users/users.enum';
 import { RolesGuard } from 'users/users.Roleguard';
 
-@Controller('barber/')
+@Controller('barbers/')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class BarberController {
     constructor(private readonly barberService: BarberService) {}
     
+    @Get()
+    @Roles(UserRole.ADMIN)
+    @HttpCode(HttpStatus.OK)
+    async getAllBarbers(){
+        const barbers = await this.barberService.getAllBarbers();
+        return barbers;
+    }
+
     @Patch(':id/upgrade-to-barber')
     @Roles(UserRole.ADMIN)
     @HttpCode(HttpStatus.CREATED)
@@ -20,5 +28,14 @@ export class BarberController {
     ){
         const barber = await this.barberService.createBarber(userRegisterBarberDto, id);
         return UserRegisterBarberDto.fromEntity(barber);
+    }
+
+    @Delete(':id/delete-barber')
+    @Roles(UserRole.ADMIN)
+    @HttpCode(HttpStatus.OK)
+    async deleteBarber(
+        @Param('id') id: string
+    ){
+        await this.barberService.deleteBarber(id);
     }
 }

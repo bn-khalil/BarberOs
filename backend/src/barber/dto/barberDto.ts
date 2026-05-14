@@ -1,21 +1,21 @@
 import { Barber } from "barber/barber.entity";
 import { STATUS } from "barber/barber.enum";
-import { User } from "users/users.entity";
+import { UserDto } from "users/dto/AuthDto";
 
 export class barberDto {
     id: string;
-    experience_years: number;
     status: STATUS;
+    user: UserDto;
     working_hours: number;
-    user_id: string;
+    experience_years: number;
 
     static fromEntity(user: Barber): barberDto {
         const dto = new barberDto();
-        dto.experience_years = user.experience_years;
         dto.id = user.id;
         dto.status = user.status;
-        dto.user_id = user.owner.id;
+        dto.user = UserDto.fromEntity(user.owner);
         dto.working_hours = user.working_hours;
+        dto.experience_years = user.experience_years;
         return dto;
     }
 }

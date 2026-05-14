@@ -3,13 +3,16 @@ import SideBar from '../components/SideBar';
 import { useState } from 'react';
 import ServiceDashboard from '../sections/admin/ServiceDashboard';
 import ServiceCreate from '../sections/admin/ServiceCreate';
+import BarberDashboard from '../sections/admin/BarberDashboard';
+import BarberCreate from '../sections/admin/BarberCreate';
+import BarberForm from '../sections/admin/BarberForm';
 
 function AdminDashboard() {
     const {user} = useAuth();
     const [currectSession, setCurrentSession] = useState('dashboard')
   return (
-    <div className='w-full h-screen flex flex-col items-center justify-center overflow-hidden'>
-        <div className="h-[90%] text-txt-col w-[90%] text-ma bg-main-second grid grid-cols-12 rounded-2xl">
+    <div className='w-full h-screen flex flex-col items-center justify-center'>
+        <div className="h-[90vh] text-txt-col w-[90%] text-ma bg-main-second grid grid-cols-12 rounded-2xl overflow-hidden">
           <SideBar setcurrectSession={setCurrentSession}/>
           <div className="col-span-10 h-full">
             <div className="w-full flex items-center justify-between border-b border-gold p-4">
@@ -29,10 +32,11 @@ function AdminDashboard() {
                 Super Admin.
               </p> */}
 
-              
               {currectSession == 'services' && <ServiceDashboard setCurrentSession={setCurrentSession}/>}
               {currectSession == 'create service' && <ServiceCreate setCurrentSession={setCurrentSession}/>}
-            
+
+              {currectSession == 'barbers' && <BarberDashboard setCurrentSession={setCurrentSession}/>}
+              {currectSession == 'create barber' && <BarberCreate setCurrentSession={setCurrentSession}/>}              
             </div>
           </div>
         </div>

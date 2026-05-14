@@ -44,7 +44,7 @@ function ServiceDashboard({setCurrentSession}:any) {
         fetchData();
     },[])
   return (
-    <div className=''>
+    <div className=' overflow-hidden'>
         <div className="flex items-center justify-between">
             <h1 className='font-sans text-gold text-xl'>All Services</h1>
             <div className="flex items-center font-bold bg-gold text-main-second p-2 px-4 cursor-pointer" onClick={()=>setCurrentSession('create service')}>
@@ -56,7 +56,7 @@ function ServiceDashboard({setCurrentSession}:any) {
                 </div>
             </div>
         </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 py-4 overflow-y-auto custom-scrollbar no-scrollbar">
                 {
                     !loading ? (
                         services?.map((service, index) => (
