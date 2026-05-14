@@ -2,6 +2,7 @@ import {Injectable, InternalServerErrorException, NotFoundException } from '@nes
 import { User } from './users.entity';
 import { userRepository } from './users.repository';
 import { UserDto } from './dto/AuthDto';
+import { UserRole } from './users.enum';
 
 @Injectable()
 export class UsersService {
@@ -26,6 +27,16 @@ export class UsersService {
     async getAllUsers(): Promise<UserDto[]> {
         try {
             const users = await this.userRepository.findAll();
+            let userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
+            return userDtos;
+        } catch (error){
+            throw error;
+        }
+    }
+
+    async getAllClients(): Promise<UserDto[]> {
+        try {
+            const users = await this.userRepository.manager.find({where: { role: UserRole.CUSTOMER }});
             let userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
             return userDtos;
         } catch (error){

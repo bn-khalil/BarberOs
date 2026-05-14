@@ -2,7 +2,8 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { userRepository } from 'users/users.repository';
 import { BarberRepository } from './barber.repository';
 import { UserRole } from 'users/users.enum';
-import { UserRegisterBarberDto } from './dto/barberDto';
+import { barberDto, UserRegisterBarberDto } from './dto/barberDto';
+import { Barber } from './barber.entity';
 
 @Injectable()
 export class BarberService {
@@ -29,7 +30,21 @@ export class BarberService {
                 working_hours: userRegisterBarberDto.working_hours,
                 owner: owner
         });
-
+        console.log(newBarber)
         return newBarber;
+    }
+
+    async getAllBarbers(): Promise<barberDto[]>{
+        try {
+            const barbers = await this.barberRepository.manager.find({
+                relations: {
+                    owner: true
+                }
+            });
+            let barberDtos: barberDto[] = barbers.map((barber: Barber) => barberDto.fromEntity(barber));
+            return barberDtos;
+        } catch (error){
+            throw error;
+        }
     }
 }
