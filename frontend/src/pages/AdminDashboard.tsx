@@ -5,7 +5,7 @@ import ServiceDashboard from '../sections/admin/ServiceDashboard';
 import ServiceCreate from '../sections/admin/ServiceCreate';
 import BarberDashboard from '../sections/admin/BarberDashboard';
 import BarberCreate from '../sections/admin/BarberCreate';
-import BarberForm from '../sections/admin/BarberForm';
+import ClientDashboard from '../sections/admin/ClientDashboard';
 
 function AdminDashboard() {
     const {user} = useAuth();
@@ -37,6 +37,9 @@ function AdminDashboard() {
 
               {currectSession == 'barbers' && <BarberDashboard setCurrentSession={setCurrentSession}/>}
               {currectSession == 'create barber' && <BarberCreate setCurrentSession={setCurrentSession}/>}              
+
+              {currectSession == 'clients' && <ClientDashboard setCurrentSession={setCurrentSession}/>}
+          
             </div>
           </div>
         </div>

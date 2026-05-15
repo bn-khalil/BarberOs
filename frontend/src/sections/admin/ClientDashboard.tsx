@@ -12,6 +12,7 @@ function ClientDashboard({setcurrectSession}:any) {
         const asyncHndler = async ()=>{
             try {
                 const response = await getAllUsers();
+                console.log(user);
                 if (response != null && response.status == HttpStatusCode.Ok) {
                     setLoading(false);
                     setuser(response.data);

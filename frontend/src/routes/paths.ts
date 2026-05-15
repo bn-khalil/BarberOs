@@ -4,5 +4,6 @@ export const PATHS = {
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   BARBERS: "/barber",
-  APPOINTEMENTS: "appointement"
+  BOOK: "/book",
+  APPOINTEMENTS: "/appointement"
 };

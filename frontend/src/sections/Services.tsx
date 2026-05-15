@@ -4,21 +4,7 @@ import { BASE_URL } from '../services/Api'
 import { getAllServices } from '../services/ServiceService';
 import type { ServiceData } from './admin/ServiceDashboard';
 
-function Services() {
-    const [services, setServices] = useState<ServiceData[]>([]);
-    const [loading, setLoading] = useState(4);
-
-    useEffect(()=>{
-        const fetchData = async()=>{
-            const response = await getAllServices();
-            if (response) {
-                setLoading(0);
-                console.log(response.data)
-                setServices(response.data);
-            }
-        }
-        fetchData();
-    },[])
+function Services({services, loading}:{services:ServiceData[], loading: number}) {
   return (
     <section>
         <h1 className='text-white uppercase text-2xl my-10 opacity-90 font-bold '>SERVICES HUB</h1>

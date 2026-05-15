@@ -1,8 +1,10 @@
-import React from 'react'
 import bg from '../assets/val1.jpg'
 import Button from './Button'
+import { useNavigate } from 'react-router-dom'
+import { PATHS } from '../routes/paths';
 
-function NewAppointment() {
+function NewAppointment({setIsBook}:any) {
+    const navigate = useNavigate();
   return (
     <div className='w-full h-[35vh] bg-main-second overflow-hidden relative my-6'>
         <img className='w-full absolute' src={bg} alt="" />
@@ -17,7 +19,7 @@ function NewAppointment() {
             <p className="text-txt-col text-sm md:text-md max-w-md mb-10 leading-relaxed">
                 You don't have any upcoming appointments. Schedule your next service with your favorite barber in minutes.
             </p>
-            <Button type="button" label="Book Now" className=""/>
+            <Button type="button" label="Book Now" className="" onClick={()=> setIsBook(true)}/>
         </div>
     </div>
   )
