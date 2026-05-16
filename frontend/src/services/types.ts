@@ -16,3 +16,13 @@ export interface Barber {
     working_hours: number;
     experience_years: number;
 }
+
+export interface ServiceData{
+    id: string,
+    title: string,
+    description: string,
+    price: number,
+    duration: number,
+    base_url: string,
+    isSelected: boolean
+}

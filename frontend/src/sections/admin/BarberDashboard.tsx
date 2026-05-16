@@ -29,7 +29,6 @@ function BarberDashboard({setCurrentSession}:any) {
     const handleDelete = async(userId: string) => {
         try {
             const response = await deleteBarber(userId);
-            console.log(response)
             if (response && response.status == HttpStatusCode.Ok) {
                 setBarbers((prevBarbers) => prevBarbers.filter(user => user.id !== userId));
                 return ;

@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
-export function Daypicker() {
-    const [selectedDay, setSelectedDay] = useState<Date>();
-    console.log(selectedDay)
+export function Daypicker({selectedDay, setSelectedDay}:{selectedDay:Date | undefined, setSelectedDay:any}) {
     return (
         <DayPicker
             animate

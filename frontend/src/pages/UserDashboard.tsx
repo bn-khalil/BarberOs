@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Header } from "../sections/Header";
 import Services from "../sections/Services";
 import { UserHero } from "../sections/UserHero";
-import type { ServiceData } from "../sections/admin/ServiceDashboard";
 import { getAllServices } from "../services/ServiceService";
 import AppointmentSection from "../sections/booking/AppointmentSection";
+import type { ServiceData } from "../services/types";
 
 
 export default function UserDashboard() {
@@ -17,7 +17,7 @@ export default function UserDashboard() {
             const response = await getAllServices();
             if (response) {
                 setLoading(0);
-                console.log(response.data)
+
                 setServices(response.data);
             }
         }
