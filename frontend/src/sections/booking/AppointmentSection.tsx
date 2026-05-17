@@ -2,29 +2,56 @@ import React, { useEffect, useState } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { TbClockHour4 } from 'react-icons/tb'
 import { Daypicker } from '../../components/DayPicker'
-import type { Barber, ServiceData } from '../../services/types'
+import type { Barber, ServiceData, Slots } from '../../services/types'
 import { getAllBarbers } from '../../services/BarberService'
 import { HttpStatusCode } from 'axios'
+import { getAllSlots } from '../../services/AppointmentService'
+import { format } from 'date-fns'
 
 function AppointmentSection({services, loading, setIsBook}:{services:ServiceData[], loading: number, setIsBook: any}) {
-    const [selectedServicesIds, setSelectedServicesIds] = useState<string[]>([]);
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
     const [selectedDay, setSelectedDay] = useState<Date>();
     const [barbers, setBarbers] = useState<Barber[]>([]);
     const [selectedBarberId, setSelectedBarberId] = useState<string | null>();
+    const [slots, SetSlots] = useState<Slots[]>([]);
 
-    const toggleBarber = (id: string) =>{
-        if (!selectedBarberId)
-            setSelectedBarberId(id);
-        else if (id === selectedBarberId)
-            setSelectedBarberId(null);
-        else
-            setSelectedBarberId(id);
-    }
+    const handleSlots = async (clickedId: string) => {
+        if (!selectedDay) {
+            console.error("Please pick a day on the calendar first!");
+            return;
+        }
+
+        let nextBarberId: string | null = clickedId;
+        if (selectedBarberId === clickedId) {
+            nextBarberId = null;
+        }
+
+        setSelectedBarberId(nextBarberId);
+        if (!nextBarberId) {
+            SetSlots([]);
+            return;
+        }
+
+        try {
+            const formattedDay: string = format(selectedDay, "yyyy-MM-dd");
+            
+            console.log(nextBarberId);
+            const response = await getAllSlots(nextBarberId, formattedDay);
+            
+            if (response && response.status === HttpStatusCode.Ok) {
+                SetSlots(response.data);
+                console.log(response.data);
+            }
+        } catch (error: any) {
+            SetSlots([]);
+        }
+    };
+
     
 
-    const selectService = (id: string) => {
-        setSelectedServicesIds((prev)=>
-            prev.includes(id) ? prev.filter(s => s !== id) : [... prev, id]
+    const selectService = (title: string) => {
+        setSelectedServices((prev)=>
+            prev.includes(title) ? prev.filter(s => s !== title) : [... prev, title]
         ) 
     }
 
@@ -52,9 +79,9 @@ function AppointmentSection({services, loading, setIsBook}:{services:ServiceData
                     <ul className="">
                         {
                             services.map((service) =>{
-                                const isSelected = selectedServicesIds.includes(service.id)
+                                const isSelected = selectedServices.includes(service.title)
                                 return (
-                                    <li className={`m-2 p-2 text-sm  rounded-lg cursor-pointer ${isSelected?"border border-gold":"border border-txt-col/13 hover:border-gold/40"}`} onClick={() => selectService(service.id)}>
+                                    <li className={`m-2 p-2 text-sm  rounded-lg cursor-pointer ${isSelected?"border border-gold":"border border-txt-col/13 hover:border-gold/40"}`} onClick={() => selectService(service.title)}>
                                         <div className="flex justify-between items-center mb-2">
                                             <p className="font-bold capitalize">{service.title}</p>
                                             <input type="checkbox" checked={isSelected} className=" appearance-none  w-4 h-4  border border-txt-col/30  rounded  bg-transparent  cursor-pointer  relative transition-all checked:bg-gold  checked:border-gold after:content-[''] after:absolute after:left-1.25 after:top-0.5 after:w-1 after:h-2 after:border-r-2 after:border-b-2  after:border-black after:rotate-45 after:opacity-0 checked:after:opacity-100"/>
@@ -79,7 +106,7 @@ function AppointmentSection({services, loading, setIsBook}:{services:ServiceData
                     <ul>
                         {
                             barbers.map((barber) =>(
-                                <li className={`m-2 p-2 text-sm  rounded-lg cursor-pointer text-txt-col ${barber.id === selectedBarberId ?"border border-gold":"border border-txt-col/13 hover:border-gold/40"}`} onClick={()=> toggleBarber(barber.id)}>
+                                <li className={`m-2 p-2 text-sm  rounded-lg cursor-pointer text-txt-col ${barber.id === selectedBarberId ?"border border-gold":"border border-txt-col/13 hover:border-gold/40"}`} onClick={()=> handleSlots(barber.id)}>
                                     <div className="flex justify-between items-center mb-2">
                                         <p className="font-bold text-sm capitalize">{barber.user.first_name + " " + barber.user.last_name} </p>
                                     </div>

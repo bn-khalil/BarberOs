@@ -26,3 +26,12 @@ export interface ServiceData{
     base_url: string,
     isSelected: boolean
 }
+
+export interface Slots{
+    barberId: string;
+    day: string;
+    slotStart: string;
+    slotEnds: string;
+    status: string;
+}
+

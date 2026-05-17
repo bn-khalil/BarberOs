@@ -27,7 +27,7 @@ export class UsersService {
     async getAllUsers(): Promise<UserDto[]> {
         try {
             const users = await this.userRepository.findAll();
-            let userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
+            const userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
             return userDtos;
         } catch (error){
             throw error;
@@ -37,7 +37,7 @@ export class UsersService {
     async getAllClients(): Promise<UserDto[]> {
         try {
             const users = await this.userRepository.manager.find({where: { role: UserRole.CUSTOMER }});
-            let userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
+            const userDtos: UserDto[] = users.map((user: User) => UserDto.fromEntity(user));
             return userDtos;
         } catch (error){
             throw error;
