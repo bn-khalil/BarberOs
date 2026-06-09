@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { AppointmentDto, AppointmentResponseDto } from './dto/appointmentDto';
 import { AppointmentRepository } from './appointment.repository';
 import { Appointment } from './appointment.entity';
@@ -20,6 +20,28 @@ export class AppointmentService {
         private readonly serviceRepository: serviceRepository,
     ){}
 
+    async getAppointmentByUser(id: string): Promise<AppointmentResponseDto>  {
+        try{
+            const customer = await this.userRepository.manager.findOneBy({id: id});
+            if (!customer)
+                throw new NotFoundException("user not found!");
+            const appointment = await this.appointmentRepositor.manager.findOne({
+                where: {customer: {id: id}},
+                relations:{
+                    barber: true,
+                    customer: true,
+                    services: true
+                },
+            });
+            if (!appointment)
+                throw new NotFoundException("appointment not found!");
+            console.log(appointment)
+            return AppointmentResponseDto.toDtoResponse(appointment);
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
     // should add a limit for appointments to avoid rebook a booked time
     // and put a limited time form 9 to 20
     // each client can book one at the day
@@ -29,6 +51,7 @@ export class AppointmentService {
         const entity = new Appointment();
 
         try {
+
             const barber = await this.barberRepository.manager.findOne({where: {id: dto.barberId}});
             if (!barber)
                 throw new NotFoundException("Barber Not Found!");
@@ -37,6 +60,10 @@ export class AppointmentService {
             if (!customer)
                 throw new NotFoundException("Client Not Rgisterd!");
             
+            const appointment = await this.appointmentRepositor.manager.findOne({where: {customer: {id: customer.id}}});
+            if (appointment)
+                throw new ConflictException("the user already has a book!");
+
             const services = await this.serviceRepository.manager.findBy({id: In(dto.serviceIds)});
             if (!services || services.length != dto.serviceIds.length)
                 throw new NotFoundException("There was a problem while chosing service!");

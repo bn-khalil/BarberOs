@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { AppointmentService } from './appointment.service';
 import { JwtAuthGuard } from 'auth/auth.guard';
 import { AppointmentDto } from './dto/appointmentDto';
@@ -21,5 +21,13 @@ export class AppointmentController {
 		@Query() slot: GetSlotDto,
 	) {
 		return this.appointmentService.getAvailableSlots(slot.barber_id, slot.day);
+	}
+
+	@Get(':id')
+	async getAppoitment(
+		@Param('id') id: string
+	) {
+		console.log(id)
+		return this.appointmentService.getAppointmentByUser(id);
 	}
 }

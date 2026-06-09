@@ -35,3 +35,10 @@ export interface Slots{
     status: string;
 }
 
+export interface Appointment {
+    costmerId: string;
+    barberId: string;
+    status: string;
+    serviceIds: string[];
+    startedAt: Date;
+}
