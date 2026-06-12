@@ -21,8 +21,8 @@ const navItems: NavItem[] = [
 ]
 
 export function Navbar() {
-  
-  	const {isAuthenticated} = useAuth();
+
+  	const {isAuthenticated, user} = useAuth();
 
   	if (isAuthenticated) {
 		navItems[1].itemName="Appointements";
@@ -31,6 +31,12 @@ export function Navbar() {
 			navItems.push({
 				itemName: "Barbers",
 				itemPath: "barbers"
+			})
+		}
+		else if (user && user.role == "ADMIN" && navItems.length < 5) {
+			navItems.push({
+				itemName: "Dashboard",
+				itemPath: "dashboard"
 			})
 		}
 	}

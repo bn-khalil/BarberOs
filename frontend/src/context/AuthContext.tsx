@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 type User = {
     id: string,
     username: string,
-    role: "admin" | "customer" | "barber"
+    role: "ADMIN" | "CUTOMER" | "BARBER"
 }
 
 type AuthContextType = {

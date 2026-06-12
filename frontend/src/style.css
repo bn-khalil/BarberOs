@@ -14,6 +14,23 @@
   --font-sans: "Open Sans", sans-serif;
 }
 
+.custom-animate {
+  --rdp-animation_duration: 0.6s; /* Change the duration of the transition. */
+  --rdp-animation_timing: ease-in; /* Choose a different timing function. */
+}
+.rdp-nav_button {
+                    color: #C5A367 !important;
+                }
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 body {
   @apply bg-main;
   overscroll-behavior: none;

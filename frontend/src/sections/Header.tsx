@@ -23,7 +23,7 @@ export function Header() {
                 </div>
             ): (
             <div className="text-txt-col  rounded-full border border-gold cursor-pointer">
-                <div className="bg-gold/50 m-[2px] w-8 h-8 rounded-full flex items-center justify-center">
+                <div className="bg-gold/50 m-0.5 w-8 h-8 rounded-full flex items-center justify-center">
                     {user?.username.toUpperCase().charAt(0)}
                 </div>
             </div>)}
