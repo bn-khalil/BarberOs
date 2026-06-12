@@ -3,14 +3,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { getAllServices } from '../../services/ServiceService';
 import { BASE_URL } from '../../services/Api';
-
-export interface ServiceData{
-    title: string,
-    description: string,
-    price: number,
-    duration: number,
-    base_url: string
-}
+import type { ServiceData } from '../../services/types';
 
 const renderLoadingItems = (number: number) => {
     return Array.from({ length: number }).map((_, index) => (
@@ -37,7 +30,6 @@ function ServiceDashboard({setCurrentSession}:any) {
             const response = await getAllServices();
             if (response) {
                 setLoading(0);
-                console.log(response.data)
                 setServices(response.data);
             }
         }

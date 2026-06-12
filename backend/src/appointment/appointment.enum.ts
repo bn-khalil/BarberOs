@@ -1,5 +1,11 @@
-export enum STATUS {
-    PENDING='pending',
-    CONFIRMED='confirmed',
-    COMPLETED='completed'
+export enum APPOINT_STATUS {
+    PENDING='PENDING',
+    CONFIRMED='CONFIRMED',
+    COMPLETED='COMPLETED'
 }
+
+export enum SLOT_STATUS {
+    AVAILABLE='AVAILABLE',
+    UNAVAILABLE='UNAVAILABLE'
+}
+

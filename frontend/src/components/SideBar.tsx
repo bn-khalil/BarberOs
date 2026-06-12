@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import logo from '../assets/main-logo.png'
-import { PATHS } from '../routes/paths'
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { GoHomeFill } from "react-icons/go";
@@ -19,10 +18,12 @@ import { FaHandScissors } from "react-icons/fa6";
 import { FaRegHandScissors } from "react-icons/fa6";
 
 import { IoSettingsSharp } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 
 function SideBar({setcurrectSession}: any) {
   const [isHover, setIsHover] = useState(0);
+  const navigate = useNavigate();
   return (
     <div className='col-span-2 h-full border-r border-r-gold flex flex-col justify-between'>
         <div className="">
@@ -40,7 +41,7 @@ function SideBar({setcurrectSession}: any) {
                 <li className='py-2 hover:pl-6 px-4 cursor-pointer text-sm hover:font-bold hover:border-l hover:border-l-gold hover:text-white hover:bg-gold/30 transition-all duration-100 opacity-50 hover:opacity-100 flex items-center' 
                 onMouseEnter={()=> setIsHover(2)} 
                 onMouseLeave={()=> setIsHover(0)}
-                onClick={()=> setcurrectSession('home')}>
+                onClick={()=> navigate('/')}>
                     {
                     isHover == 2 ? <GoHomeFill className='size-5' /> : <GoHome className='size-5' />
                     }

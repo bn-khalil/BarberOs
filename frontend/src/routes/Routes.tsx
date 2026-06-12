@@ -9,6 +9,7 @@ import { PageNotFound } from "../pages/NotFound";
 import HomePage from "../pages/HomePage";
 import AdminRoute from "../components/AdminRoute";
 import AdminDashboard from "../pages/AdminDashboard";
+import BookPage from "../pages/BookPage";
 
 export default function AppRouter() {
     return (
@@ -22,6 +23,7 @@ export default function AppRouter() {
                 </Route>
 
                 <Route element={<ProtectedRoute/>}>
+                    <Route path={PATHS.BOOK} element={<BookPage/>}/>
                 </Route>
 
                 <Route element={<AdminRoute/>}>

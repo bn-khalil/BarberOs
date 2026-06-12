@@ -33,7 +33,7 @@ export function Navbar() {
 				itemPath: "barbers"
 			})
 		}
-		if (user?.role == "ADMIN") {
+		else if (user && user.role == "ADMIN" && navItems.length < 5) {
 			navItems.push({
 				itemName: "Dashboard",
 				itemPath: "dashboard"

@@ -1,4 +1,3 @@
-import type { ServiceData } from "../sections/admin/ServiceDashboard";
 import apiClient from "./Api";
 
 

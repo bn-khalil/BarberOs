@@ -14,5 +14,6 @@ import { AuthModule } from 'auth/auth.module';
   ],
   controllers: [BarberController],
   providers: [BarberService, BarberRepository],
+  exports: [BarberRepository]
 })
 export class BarberModule {}

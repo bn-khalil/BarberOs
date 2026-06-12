@@ -29,7 +29,6 @@ function BarberDashboard({setCurrentSession}:any) {
     const handleDelete = async(userId: string) => {
         try {
             const response = await deleteBarber(userId);
-            console.log(response)
             if (response && response.status == HttpStatusCode.Ok) {
                 setBarbers((prevBarbers) => prevBarbers.filter(user => user.id !== userId));
                 return ;
@@ -39,7 +38,7 @@ function BarberDashboard({setCurrentSession}:any) {
         }
     }
   return (
-    <div className='w-full h-[80vh] relative'>
+    <div className='w-full h-[78vh] relative'>
         <p className={` absolute bottom-10 right-1 text-main/50 rounded-2xl bg-red-500 ${message ? "px-4 py-1":""}`}>{message}</p>
         <div className="flex items-center justify-between mb-4">
             <h1 className='font-sans text-gold text-xl'>All Barbers</h1>
@@ -58,12 +57,12 @@ function BarberDashboard({setCurrentSession}:any) {
                     barbers?.map((barber, index)=>(
                         <li className={`flex justify-between items-center ${index % 2 == 1?"bg-main": "bg-main/20"} p-3  px-4 m-2 rounded-xl`}>
                             {/* <img src="" alt="" /> */}
-                            <h1>{barber.user.first_name + " " + barber.user.last_name}</h1>
-                            <span>{barber.user.role}</span>
-                            <span>{barber.user.phone_number}</span>
-                            <span>{barber.user.createdAt.toString()}</span>
-                            <div className="text-red-400 cursor-pointer" onClick={()=>handleDelete(barber.id)}>
-                                <MdDeleteForever size={22} />
+                            <h1 className='w-1/5 font-bold text-sm font-display'>{barber.user.first_name + " " + barber.user.last_name}</h1>
+                            <span className='w-1/5 text-xs font-bold  text-green-400/50'>{barber.user.role}</span>
+                            <span className='w-1/5 font-mono text-xs'>{barber.user.phone_number}</span>
+                            <span className='w-1/5 text-end text-xs'>{barber.user.createdAt.toString()}</span>
+                            <div className="w-1/5 flex justify-end text-red-400 cursor-pointer" >
+                                <MdDeleteForever size={22} onClick={()=>handleDelete(barber.id)} />
                             </div>
                         </li>
                     ))
